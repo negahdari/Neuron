@@ -16,12 +16,18 @@ namespace Neuron
 
     public partial class MainForm : Form
     {
+        
         NeuronClass neuronClass = new NeuronClass();
         int counter;
         bool pass_interval = false;
         public MainForm()
         {
             InitializeComponent();
+            Height = 170;
+#if (DEBUG)
+            Height = 180 +  debuglistBox.Height ;
+#endif
+
         }
 
 
@@ -38,6 +44,11 @@ namespace Neuron
             Countlabel.Text = "...";
             Signalbutton.Enabled = false;
             neuronClass.Pulse(true);
+
+#if (DEBUG)
+            debuglistBox.Items.Add(1);
+#endif
+
             counter = 3;
             pass_interval = true;
         }
@@ -83,6 +94,9 @@ namespace Neuron
             if (counter == 0)
             {
                 neuronClass.Pulse();
+#if (DEBUG)
+                debuglistBox.Items.Add(0);
+#endif
                 Signalbutton.Enabled = false;
                 if (!neuronClass.Predict())
                 {
