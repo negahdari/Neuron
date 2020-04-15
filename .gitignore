@@ -1,5 +1,3 @@
-
-Neuron/bin/Debug/Neuron.exe
 Neuron/bin/Debug/Neuron.exe.config
 Neuron/bin/Debug/Neuron.pdb
 Neuron/bin/Release/Neuron.exe.config
@@ -23,3 +21,4 @@ Neuron/obj/Release/Neuron.MainForm.resources
 Neuron/obj/Release/Neuron.pdb
 Neuron/obj/Release/Neuron.Properties.Resources.resources
 .vs/Neuron/v16/.suo
+Neuron/obj/Release/DesignTimeResolveAssemblyReferencesInput.cache

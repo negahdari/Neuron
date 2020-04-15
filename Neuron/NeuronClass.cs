@@ -21,16 +21,15 @@ namespace Neuron
         {
             if (left_ == right_) return false;
             if (samples.Count() <= level) return false;
+
             if (samples[level])
             {
-                right_.weight+= 0.1;
-                left_.weight -= 0.05;
+                right_.weight+= 1 * (level+1);
                 right_.teach(samples);
             }
             else
             {
-                left_.weight+= 0.1;
-                right_.weight -= 0.05;
+                left_.weight+= 1 * (level+1);
                 left_.teach(samples);
             }
             return true;
@@ -63,7 +62,41 @@ namespace Neuron
             }
         }
 
-        public double weight=0.0;
+        public void render(System.Windows.Forms.TreeView treeview, string lable, System.Windows.Forms.TreeNode tnode=null)
+        {
+            System.Windows.Forms.TreeNode currentnode=null;
+            if (tnode == null) 
+            {
+                if (treeview.Nodes[lable] == null)
+                {
+                    currentnode = new System.Windows.Forms.TreeNode(lable);
+                    currentnode.Name = lable;
+                    treeview.Nodes.Add(currentnode);
+                }
+                else
+                    currentnode = treeview.Nodes[lable];
+            }
+            else
+            {
+                tnode.Expand();
+                if (tnode.Nodes[lable] == null)
+                {
+                    currentnode = new System.Windows.Forms.TreeNode(lable);
+                    currentnode.Name = lable;
+                    tnode.Nodes.Add(currentnode);
+                }else
+                    currentnode = tnode.Nodes[lable];
+
+
+            }
+            currentnode.Text = lable + "    " + weight ;
+
+            if (right_ != null) right_.render(treeview, "R", currentnode);
+            if (left_ != null) left_.render(treeview, "L", currentnode);
+
+        }
+
+        public long weight=0;
         public Node left_ = null;
         public Node right_ = null;
     }
@@ -92,6 +125,13 @@ namespace Neuron
         public bool Predict()
         {
             return root.Predict;
+        }
+
+
+        public void render(System.Windows.Forms.TreeView treeview)
+        {
+
+            root.render(treeview,"Root");
         }
     }
 }

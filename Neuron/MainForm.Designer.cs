@@ -28,6 +28,7 @@ namespace Neuron
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
             this.LeftSignalbutton = new System.Windows.Forms.Button();
             this.LCountlabel = new System.Windows.Forms.Label();
@@ -40,6 +41,9 @@ namespace Neuron
             this.label2 = new System.Windows.Forms.Label();
             this.Passlabel = new System.Windows.Forms.Label();
             this.Faillabel = new System.Windows.Forms.Label();
+            this.NeurontreeView = new System.Windows.Forms.TreeView();
+            this.Autobutton = new System.Windows.Forms.Button();
+            this.timerAuto = new System.Windows.Forms.Timer(this.components);
             this.SuspendLayout();
             // 
             // LeftSignalbutton
@@ -205,6 +209,40 @@ namespace Neuron
             this.Faillabel.Text = "-";
             this.Faillabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
+            // NeurontreeView
+            // 
+            this.NeurontreeView.BackColor = System.Drawing.Color.DarkGray;
+            this.NeurontreeView.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.NeurontreeView.Location = new System.Drawing.Point(207, 177);
+            this.NeurontreeView.Name = "NeurontreeView";
+            this.NeurontreeView.Size = new System.Drawing.Size(237, 325);
+            this.NeurontreeView.TabIndex = 14;
+            // 
+            // Autobutton
+            // 
+            this.Autobutton.BackColor = System.Drawing.Color.Transparent;
+            this.Autobutton.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.Autobutton.FlatAppearance.BorderColor = System.Drawing.Color.PaleTurquoise;
+            this.Autobutton.FlatAppearance.BorderSize = 3;
+            this.Autobutton.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
+            this.Autobutton.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
+            this.Autobutton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.Autobutton.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(254)));
+            this.Autobutton.ForeColor = System.Drawing.Color.LemonChiffon;
+            this.Autobutton.Location = new System.Drawing.Point(191, 2);
+            this.Autobutton.Margin = new System.Windows.Forms.Padding(2);
+            this.Autobutton.Name = "Autobutton";
+            this.Autobutton.Size = new System.Drawing.Size(57, 47);
+            this.Autobutton.TabIndex = 15;
+            this.Autobutton.Text = "Auto";
+            this.Autobutton.UseVisualStyleBackColor = false;
+            this.Autobutton.Click += new System.EventHandler(this.Autobutton_Click);
+            // 
+            // timerAuto
+            // 
+            this.timerAuto.Interval = 1;
+            this.timerAuto.Tick += new System.EventHandler(this.timerAuto_Tick);
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -213,6 +251,8 @@ namespace Neuron
             this.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("$this.BackgroundImage")));
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
             this.ClientSize = new System.Drawing.Size(450, 514);
+            this.Controls.Add(this.Autobutton);
+            this.Controls.Add(this.NeurontreeView);
             this.Controls.Add(this.Faillabel);
             this.Controls.Add(this.Passlabel);
             this.Controls.Add(this.label2);
@@ -247,6 +287,9 @@ namespace Neuron
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label Passlabel;
         private System.Windows.Forms.Label Faillabel;
+        private System.Windows.Forms.TreeView NeurontreeView;
+        private System.Windows.Forms.Button Autobutton;
+        private System.Windows.Forms.Timer timerAuto;
     }
 }
 

@@ -17,12 +17,14 @@ namespace Neuron
     public partial class MainForm : Form
     {
         
-        NeuronClass neuronClass = new NeuronClass();
+        NeuronClass neuronClass = new NeuronClass(5);
         int LCount=0, RCount = 0;
         int Pass=0, Fail=0;
 
         public MainForm()
         {
+
+
             InitializeComponent();
             Height = 170;
 #if (DEBUG)
@@ -37,6 +39,7 @@ namespace Neuron
             bool last_predict = neuronClass.Predict();
             neuronClass.Pulse(pulse);
 
+
             if (pulse) {
                 RCount++;
                 RCountlabel.Text = RCount.ToString();
@@ -49,6 +52,7 @@ namespace Neuron
 
 #if (DEBUG)
             debuglistBox.Items.Add(pulse?1:0);
+            neuronClass.render(NeurontreeView);
 #endif
 
 
@@ -72,6 +76,17 @@ namespace Neuron
         private void Exitbutton_Click(object sender, EventArgs e)
         {
             Application.Exit();
+        }
+
+        private void Autobutton_Click(object sender, EventArgs e)
+        {
+            timerAuto.Enabled = !timerAuto.Enabled;
+        }
+
+        private void timerAuto_Tick(object sender, EventArgs e)
+        {
+            Random rand = new Random();
+            update_state(rand.Next(0, 2) == 0);
         }
 
         private void LeftSignalbutton_Click(object sender, EventArgs e)
