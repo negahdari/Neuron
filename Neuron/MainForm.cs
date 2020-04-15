@@ -18,8 +18,9 @@ namespace Neuron
     {
         
         NeuronClass neuronClass = new NeuronClass();
-        int counter;
-        bool pass_interval = false;
+        int LCount=0, RCount = 0;
+        int Pass=0, Fail=0;
+
         public MainForm()
         {
             InitializeComponent();
@@ -31,98 +32,56 @@ namespace Neuron
         }
 
 
-        private void Signalbutton_Click(object sender, EventArgs e)
+        private void update_state(bool pulse)
         {
-            if (!Countertimer.Enabled)
-            {
-                counter = 3;
-                Countertimer.Enabled = true;
-                Startbutton.Text = "Stop";
-                return;
-            }
+            bool last_predict = neuronClass.Predict();
+            neuronClass.Pulse(pulse);
 
-            Countlabel.Text = "...";
-            Signalbutton.Enabled = false;
-            neuronClass.Pulse(true);
-
-#if (DEBUG)
-            debuglistBox.Items.Add(1);
-#endif
-
-            counter = 3;
-            pass_interval = true;
-        }
-
-        private void Startbutton_Click(object sender, EventArgs e)
-        {
-            if (!Countertimer.Enabled)
-            {
-                counter = 3;
-                Countertimer.Enabled = true;
-                Startbutton.Text = "Stop";
+            if (pulse) {
+                RCount++;
+                RCountlabel.Text = RCount.ToString();
             }
             else
             {
-                Countertimer.Enabled = false;
-                Startbutton.Text = "Go";
+                LCount++;
+                LCountlabel.Text = LCount.ToString();
             }
 
-        }
-
-        private void Countertimer_Tick(object sender, EventArgs e)
-        {
-
-            if (pass_interval)
-            {
-                Countlabel.Text = "...";
-                if (neuronClass.Predict())
-                {
-                    Predictlabel.ForeColor = Color.LightGreen;
-                    Predictlabel.Text = "Prediction Passed!";
-                }
-                else
-                {
-                    Predictlabel.ForeColor = Color.OrangeRed;
-                    Predictlabel.Text = "Prediction Failed!";
-                }
-                pass_interval = false;
-                return;
-            }
-
-
-            Countlabel.Text = counter.ToString();
-            if (counter == 0)
-            {
-                neuronClass.Pulse();
 #if (DEBUG)
-                debuglistBox.Items.Add(0);
+            debuglistBox.Items.Add(pulse?1:0);
 #endif
-                Signalbutton.Enabled = false;
-                if (!neuronClass.Predict())
-                {
-                    Predictlabel.ForeColor = Color.LightGreen;
-                    Predictlabel.Text = "Prediction Passed!";
-                }
-                else
-                {
-                    Predictlabel.ForeColor = Color.OrangeRed;
-                    Predictlabel.Text = "Prediction Failed!";
-                }
 
-                counter = 3;
-                return;
+
+            if (last_predict==pulse)
+            {
+                Pass++;
+                Predictlabel.ForeColor = Color.LightGreen;
+                Predictlabel.Text = "Pass";
+                Passlabel.Text = Pass.ToString();
             }
-
-            if (!Signalbutton.Enabled )
-                Signalbutton.Enabled = true;
-
-            counter--;
+            else
+            {
+                Fail++;
+                Predictlabel.ForeColor = Color.OrangeRed;
+                Predictlabel.Text = "Fail";
+                Faillabel.Text = Fail.ToString();
+            }
 
         }
 
         private void Exitbutton_Click(object sender, EventArgs e)
         {
             Application.Exit();
+        }
+
+        private void LeftSignalbutton_Click(object sender, EventArgs e)
+        {
+            update_state(false);
+        }
+
+        private void RightSignalbutton_Click(object sender, EventArgs e)
+        {
+            update_state(true);
         }
     }
 }

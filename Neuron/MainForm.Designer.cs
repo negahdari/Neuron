@@ -28,71 +28,52 @@ namespace Neuron
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
-            this.Signalbutton = new System.Windows.Forms.Button();
-            this.Startbutton = new System.Windows.Forms.Button();
-            this.Countlabel = new System.Windows.Forms.Label();
-            this.Countertimer = new System.Windows.Forms.Timer(this.components);
+            this.LeftSignalbutton = new System.Windows.Forms.Button();
+            this.LCountlabel = new System.Windows.Forms.Label();
             this.Predictlabel = new System.Windows.Forms.Label();
             this.Exitbutton = new System.Windows.Forms.Button();
             this.debuglistBox = new System.Windows.Forms.ListBox();
+            this.RightSignalbutton = new System.Windows.Forms.Button();
+            this.RCountlabel = new System.Windows.Forms.Label();
+            this.label1 = new System.Windows.Forms.Label();
+            this.label2 = new System.Windows.Forms.Label();
+            this.Passlabel = new System.Windows.Forms.Label();
+            this.Faillabel = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
-            // Signalbutton
+            // LeftSignalbutton
             // 
-            this.Signalbutton.BackColor = System.Drawing.Color.Transparent;
-            this.Signalbutton.FlatAppearance.BorderColor = System.Drawing.Color.PaleTurquoise;
-            this.Signalbutton.FlatAppearance.BorderSize = 3;
-            this.Signalbutton.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
-            this.Signalbutton.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
-            this.Signalbutton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.Signalbutton.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(254)));
-            this.Signalbutton.ForeColor = System.Drawing.Color.LemonChiffon;
-            this.Signalbutton.Location = new System.Drawing.Point(139, 57);
-            this.Signalbutton.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
-            this.Signalbutton.Name = "Signalbutton";
-            this.Signalbutton.Size = new System.Drawing.Size(157, 47);
-            this.Signalbutton.TabIndex = 0;
-            this.Signalbutton.Text = "Press or Pass";
-            this.Signalbutton.UseVisualStyleBackColor = false;
-            this.Signalbutton.Click += new System.EventHandler(this.Signalbutton_Click);
+            this.LeftSignalbutton.BackColor = System.Drawing.Color.Transparent;
+            this.LeftSignalbutton.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.LeftSignalbutton.FlatAppearance.BorderColor = System.Drawing.Color.PaleTurquoise;
+            this.LeftSignalbutton.FlatAppearance.BorderSize = 3;
+            this.LeftSignalbutton.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
+            this.LeftSignalbutton.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
+            this.LeftSignalbutton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.LeftSignalbutton.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(254)));
+            this.LeftSignalbutton.ForeColor = System.Drawing.Color.LemonChiffon;
+            this.LeftSignalbutton.Location = new System.Drawing.Point(75, 57);
+            this.LeftSignalbutton.Margin = new System.Windows.Forms.Padding(2);
+            this.LeftSignalbutton.Name = "LeftSignalbutton";
+            this.LeftSignalbutton.Size = new System.Drawing.Size(130, 47);
+            this.LeftSignalbutton.TabIndex = 0;
+            this.LeftSignalbutton.Text = "<<<";
+            this.LeftSignalbutton.UseVisualStyleBackColor = false;
+            this.LeftSignalbutton.Click += new System.EventHandler(this.LeftSignalbutton_Click);
             // 
-            // Startbutton
+            // LCountlabel
             // 
-            this.Startbutton.BackColor = System.Drawing.Color.Transparent;
-            this.Startbutton.FlatAppearance.BorderSize = 0;
-            this.Startbutton.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
-            this.Startbutton.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
-            this.Startbutton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.Startbutton.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(254)));
-            this.Startbutton.ForeColor = System.Drawing.Color.Aqua;
-            this.Startbutton.Location = new System.Drawing.Point(8, 8);
-            this.Startbutton.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
-            this.Startbutton.Name = "Startbutton";
-            this.Startbutton.Size = new System.Drawing.Size(79, 47);
-            this.Startbutton.TabIndex = 1;
-            this.Startbutton.Text = "Go";
-            this.Startbutton.UseVisualStyleBackColor = false;
-            this.Startbutton.Click += new System.EventHandler(this.Startbutton_Click);
-            // 
-            // Countlabel
-            // 
-            this.Countlabel.BackColor = System.Drawing.Color.Transparent;
-            this.Countlabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 24F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(254)));
-            this.Countlabel.ForeColor = System.Drawing.Color.FloralWhite;
-            this.Countlabel.Location = new System.Drawing.Point(162, 14);
-            this.Countlabel.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.Countlabel.Name = "Countlabel";
-            this.Countlabel.Size = new System.Drawing.Size(112, 40);
-            this.Countlabel.TabIndex = 2;
-            this.Countlabel.Text = "-";
-            this.Countlabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // Countertimer
-            // 
-            this.Countertimer.Interval = 1000;
-            this.Countertimer.Tick += new System.EventHandler(this.Countertimer_Tick);
+            this.LCountlabel.BackColor = System.Drawing.Color.Transparent;
+            this.LCountlabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 24F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(254)));
+            this.LCountlabel.ForeColor = System.Drawing.Color.FloralWhite;
+            this.LCountlabel.Location = new System.Drawing.Point(75, 9);
+            this.LCountlabel.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.LCountlabel.Name = "LCountlabel";
+            this.LCountlabel.Size = new System.Drawing.Size(130, 40);
+            this.LCountlabel.TabIndex = 2;
+            this.LCountlabel.Text = "-";
+            this.LCountlabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // Predictlabel
             // 
@@ -110,16 +91,17 @@ namespace Neuron
             // Exitbutton
             // 
             this.Exitbutton.BackColor = System.Drawing.Color.Transparent;
+            this.Exitbutton.Cursor = System.Windows.Forms.Cursors.Hand;
             this.Exitbutton.FlatAppearance.BorderSize = 0;
             this.Exitbutton.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
             this.Exitbutton.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
             this.Exitbutton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.Exitbutton.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(254)));
             this.Exitbutton.ForeColor = System.Drawing.Color.Aqua;
-            this.Exitbutton.Location = new System.Drawing.Point(365, 114);
-            this.Exitbutton.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.Exitbutton.Location = new System.Drawing.Point(375, 114);
+            this.Exitbutton.Margin = new System.Windows.Forms.Padding(2);
             this.Exitbutton.Name = "Exitbutton";
-            this.Exitbutton.Size = new System.Drawing.Size(79, 47);
+            this.Exitbutton.Size = new System.Drawing.Size(69, 47);
             this.Exitbutton.TabIndex = 6;
             this.Exitbutton.Text = "Exit";
             this.Exitbutton.UseVisualStyleBackColor = false;
@@ -138,6 +120,91 @@ namespace Neuron
             this.debuglistBox.Size = new System.Drawing.Size(188, 325);
             this.debuglistBox.TabIndex = 7;
             // 
+            // RightSignalbutton
+            // 
+            this.RightSignalbutton.BackColor = System.Drawing.Color.Transparent;
+            this.RightSignalbutton.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.RightSignalbutton.FlatAppearance.BorderColor = System.Drawing.Color.PaleTurquoise;
+            this.RightSignalbutton.FlatAppearance.BorderSize = 3;
+            this.RightSignalbutton.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
+            this.RightSignalbutton.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
+            this.RightSignalbutton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.RightSignalbutton.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(254)));
+            this.RightSignalbutton.ForeColor = System.Drawing.Color.LemonChiffon;
+            this.RightSignalbutton.Location = new System.Drawing.Point(233, 57);
+            this.RightSignalbutton.Margin = new System.Windows.Forms.Padding(2);
+            this.RightSignalbutton.Name = "RightSignalbutton";
+            this.RightSignalbutton.Size = new System.Drawing.Size(130, 47);
+            this.RightSignalbutton.TabIndex = 8;
+            this.RightSignalbutton.Text = ">>>";
+            this.RightSignalbutton.UseVisualStyleBackColor = false;
+            this.RightSignalbutton.Click += new System.EventHandler(this.RightSignalbutton_Click);
+            // 
+            // RCountlabel
+            // 
+            this.RCountlabel.BackColor = System.Drawing.Color.Transparent;
+            this.RCountlabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 24F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(254)));
+            this.RCountlabel.ForeColor = System.Drawing.Color.FloralWhite;
+            this.RCountlabel.Location = new System.Drawing.Point(233, 9);
+            this.RCountlabel.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.RCountlabel.Name = "RCountlabel";
+            this.RCountlabel.Size = new System.Drawing.Size(130, 40);
+            this.RCountlabel.TabIndex = 9;
+            this.RCountlabel.Text = "-";
+            this.RCountlabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // label1
+            // 
+            this.label1.BackColor = System.Drawing.Color.Transparent;
+            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(254)));
+            this.label1.ForeColor = System.Drawing.Color.FloralWhite;
+            this.label1.Location = new System.Drawing.Point(11, 9);
+            this.label1.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(60, 40);
+            this.label1.TabIndex = 10;
+            this.label1.Text = "You :";
+            this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // label2
+            // 
+            this.label2.BackColor = System.Drawing.Color.Transparent;
+            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(254)));
+            this.label2.ForeColor = System.Drawing.Color.FloralWhite;
+            this.label2.Location = new System.Drawing.Point(11, 115);
+            this.label2.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(60, 40);
+            this.label2.TabIndex = 11;
+            this.label2.Text = "Me :";
+            this.label2.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // Passlabel
+            // 
+            this.Passlabel.BackColor = System.Drawing.Color.Transparent;
+            this.Passlabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(254)));
+            this.Passlabel.ForeColor = System.Drawing.Color.LightGreen;
+            this.Passlabel.Location = new System.Drawing.Point(75, 132);
+            this.Passlabel.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.Passlabel.Name = "Passlabel";
+            this.Passlabel.Size = new System.Drawing.Size(61, 40);
+            this.Passlabel.TabIndex = 12;
+            this.Passlabel.Text = "-";
+            this.Passlabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // Faillabel
+            // 
+            this.Faillabel.BackColor = System.Drawing.Color.Transparent;
+            this.Faillabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(254)));
+            this.Faillabel.ForeColor = System.Drawing.Color.OrangeRed;
+            this.Faillabel.Location = new System.Drawing.Point(302, 132);
+            this.Faillabel.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.Faillabel.Name = "Faillabel";
+            this.Faillabel.Size = new System.Drawing.Size(61, 40);
+            this.Faillabel.TabIndex = 13;
+            this.Faillabel.Text = "-";
+            this.Faillabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -146,15 +213,20 @@ namespace Neuron
             this.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("$this.BackgroundImage")));
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
             this.ClientSize = new System.Drawing.Size(450, 171);
+            this.Controls.Add(this.Faillabel);
+            this.Controls.Add(this.Passlabel);
+            this.Controls.Add(this.label2);
+            this.Controls.Add(this.label1);
+            this.Controls.Add(this.RCountlabel);
+            this.Controls.Add(this.RightSignalbutton);
             this.Controls.Add(this.debuglistBox);
             this.Controls.Add(this.Exitbutton);
             this.Controls.Add(this.Predictlabel);
-            this.Controls.Add(this.Countlabel);
-            this.Controls.Add(this.Startbutton);
-            this.Controls.Add(this.Signalbutton);
+            this.Controls.Add(this.LCountlabel);
+            this.Controls.Add(this.LeftSignalbutton);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "MainForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Neuron";
@@ -164,13 +236,17 @@ namespace Neuron
 
         #endregion
 
-        private System.Windows.Forms.Button Signalbutton;
-        private System.Windows.Forms.Button Startbutton;
-        private System.Windows.Forms.Label Countlabel;
-        private System.Windows.Forms.Timer Countertimer;
+        private System.Windows.Forms.Button LeftSignalbutton;
+        private System.Windows.Forms.Label LCountlabel;
         private System.Windows.Forms.Label Predictlabel;
         private System.Windows.Forms.Button Exitbutton;
         public System.Windows.Forms.ListBox debuglistBox;
+        private System.Windows.Forms.Button RightSignalbutton;
+        private System.Windows.Forms.Label RCountlabel;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Label Passlabel;
+        private System.Windows.Forms.Label Faillabel;
     }
 }
 
