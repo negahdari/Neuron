@@ -212,7 +212,7 @@ namespace Neuron
             this.BackColor = System.Drawing.SystemColors.Desktop;
             this.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("$this.BackgroundImage")));
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
-            this.ClientSize = new System.Drawing.Size(450, 171);
+            this.ClientSize = new System.Drawing.Size(450, 514);
             this.Controls.Add(this.Faillabel);
             this.Controls.Add(this.Passlabel);
             this.Controls.Add(this.label2);
