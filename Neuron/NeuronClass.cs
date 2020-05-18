@@ -17,20 +17,43 @@ namespace Neuron
         }
         int level = 0;
 
-        public bool teach(List<bool> samples)
+
+        public bool train(List<bool> samples)
         {
             if (left_ == right_) return false;
             if (samples.Count() <= level) return false;
 
             if (samples[level])
             {
-                right_.weight+= 1 * (level+1);
-                right_.teach(samples);
+                right_.weight += 1;
+                right_.train(samples);
             }
             else
             {
-                left_.weight+= 1 * (level+1);
-                left_.teach(samples);
+                left_.weight += 1;
+                left_.train(samples);
+            }
+            return true;
+        }
+
+
+        public bool learn(List<bool> samples, bool win)
+        {
+            if (left_ == right_) return false;
+            if (samples.Count() <= level) return false;
+
+            int value = (level + 1);
+            if (win) value *= -1;
+
+            if (samples[level])
+            {
+                right_.weight+= value;
+                right_.learn(samples, win);
+            }
+            else
+            {
+                left_.weight+= value;
+                left_.learn(samples, win);
             }
             return true;
         }
@@ -114,12 +137,13 @@ namespace Neuron
 
         List<bool> samples = new List<bool>();
 
-        public void Pulse(bool sw)
+        public void Pulse(bool value, bool predict)
         {
-            samples.Insert(0,sw);
+            root.learn(samples,value == predict);
+            samples.Insert(0, value);
             if(samples.Count() > learn_dept)
                 samples.RemoveRange(learn_dept, samples.Count()- learn_dept);
-            root.teach(samples);
+            root.train(samples);
         }
 
         public bool Predict()

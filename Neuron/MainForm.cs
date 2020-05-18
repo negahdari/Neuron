@@ -17,7 +17,7 @@ namespace Neuron
     public partial class MainForm : Form
     {
         
-        NeuronClass neuronClass = new NeuronClass(5);
+        NeuronClass neuronClass = new NeuronClass(3);
         int LCount=0, RCount = 0;
         int Pass=0, Fail=0;
 
@@ -37,7 +37,7 @@ namespace Neuron
         private void update_state(bool pulse)
         {
             bool last_predict = neuronClass.Predict();
-            neuronClass.Pulse(pulse);
+            neuronClass.Pulse(pulse, last_predict);
 
 
             if (pulse) {
@@ -85,7 +85,7 @@ namespace Neuron
 
         private void timerAuto_Tick(object sender, EventArgs e)
         {
-            Random rand = new Random();
+            Random rand = new Random(Guid.NewGuid().GetHashCode());
             update_state(rand.Next(0, 2) == 0);
         }
 
