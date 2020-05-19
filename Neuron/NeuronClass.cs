@@ -8,54 +8,59 @@ namespace Neuron
 {
     class Node
     {
-        public Node(int dept, int level = 0)
+        public Node(in Node parent, int dept, int level = 0)
         {
             this.level = level;
+            parent_ = parent;
             if (level == dept) return;
-            left_ =new Node(dept, level + 1);
-            right_ = new Node(dept, level + 1);
+            left_ = new Node(this, dept, level + 1);
+            right_ = new Node(this, dept, level + 1);
         }
         int level = 0;
 
 
-        public bool train(List<bool> samples)
+        public bool train(List<bool> samples, long shift_weight=1)
         {
             if (left_ == right_) return false;
             if (samples.Count() <= level) return false;
 
             if (samples[level])
             {
-                right_.weight += 1;
-                right_.train(samples);
+                if(!right_.train(samples, shift_weight))
+                    right_.weight += shift_weight;
             }
             else
             {
-                left_.weight += 1;
-                left_.train(samples);
+                if (!left_.train(samples, shift_weight))
+                    left_.weight += shift_weight;
             }
             return true;
         }
 
 
-        public bool learn(List<bool> samples, bool win)
+        public bool learn(List<bool> samples, bool win,int price)
         {
-            if (left_ == right_) return false;
-            if (samples.Count() <= level) return false;
+            if (left_ == right_) return false;  
 
-            int value = (level + 1);
-            if (win) value *= -1;
-
-            if (samples[level])
-            {
-                right_.weight+= value;
-                right_.learn(samples, win);
+            if (MaxLevels == level + 1) {
+                if (left_.weight > right_.weight)
+                {
+                    left_.weight += win ? +price : -price;
+                    return true;
+                }
+                else if (left_.weight < right_.weight)
+                {
+                    right_.weight += win ? +price : -price;
+                    return true;
+                }
+                else return false;
             }
+
+            if (samples.Count() <= level + 1) return false;
+            if (samples[level + 1])
+                return right_.learn(samples, win, price);
             else
-            {
-                left_.weight+= value;
-                left_.learn(samples, win);
-            }
-            return true;
+                return left_.learn(samples, win, price);
         }
 
         protected double max_sub_weight
@@ -67,12 +72,28 @@ namespace Neuron
             }
         } 
 
-        public bool Predict
+        public bool Predict(List<bool> samples)
         {
-            get
-            {
-                return left_.max_sub_weight> right_.max_sub_weight?false:true;
-            }
+            if (left_ == right_) return Predict();
+
+            if(MaxLevels == level + 1)
+                return left_.max_sub_weight > right_.max_sub_weight ? false : true;
+
+            if (samples.Count() <= level + 1)
+                return Predict();
+
+            if (samples[level + 1])
+                return right_.Predict(samples);
+            else
+                return left_.Predict(samples);
+        }
+
+        public bool Predict()
+        {
+            if (left_ == right_)
+                return  (parent_ == null ? true : parent_.Predict());
+            else
+                return left_.max_sub_weight > right_.max_sub_weight ? false : true;
         }
 
         public int MaxLevels
@@ -120,6 +141,7 @@ namespace Neuron
         }
 
         public long weight=0;
+        public Node parent_ = null;
         public Node left_ = null;
         public Node right_ = null;
     }
@@ -128,27 +150,33 @@ namespace Neuron
     {
         int learn_dept;
         private Node root=null;
+        int price = 0;
 
         public NeuronClass(int learndept=3)
         {
             learn_dept = learndept;
-            root = new Node(learn_dept);
+            root = new Node(null, learn_dept);
         }
 
         List<bool> samples = new List<bool>();
 
         public void Pulse(bool value, bool predict)
         {
-            root.learn(samples,value == predict);
-            samples.Insert(0, value);
+            if (value == predict)
+                price = (price >= 0)? price + 1 : 1;
+            if (value != predict)
+                price= (price <= 0)? price -1 : -1;
+
+            root.learn(samples,value == predict, price<0? -price:price);
+            samples.Add(value);
             if(samples.Count() > learn_dept)
-                samples.RemoveRange(learn_dept, samples.Count()- learn_dept);
+                samples.RemoveRange(0, samples.Count() - learn_dept);
             root.train(samples);
         }
 
         public bool Predict()
         {
-            return root.Predict;
+            return root.Predict(samples);
         }
 
 
