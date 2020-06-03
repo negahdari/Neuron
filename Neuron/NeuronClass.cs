@@ -38,6 +38,34 @@ namespace Neuron
         }
 
 
+        public void forget(double factor)
+        {
+            if (left_ == right_) return;
+            right_.forget(factor);
+            left_.forget(factor);
+
+            if (right_.weight != 0)
+            {
+                if (right_.weight > factor)
+                    right_.weight -= factor;
+                else if (right_.weight < -factor)
+                    right_.weight += factor;
+                else
+                    right_.weight = 0;
+            }
+
+            if (left_.weight != 0)
+            {
+                if (left_.weight > factor)
+                    left_.weight -= factor;
+                else if (right_.weight < -factor)
+                    left_.weight += factor;
+                else
+                    left_.weight = 0;
+            }
+
+        }
+
         public bool learn(List<bool> samples, bool win,int price)
         {
             if (left_ == right_) return false;  
@@ -133,14 +161,14 @@ namespace Neuron
 
 
             }
-            currentnode.Text = lable + "    " + weight ;
+            currentnode.Text = lable + "    " + weight.ToString("0.0") ;
 
             if (right_ != null) right_.render(treeview, "R", currentnode);
             if (left_ != null) left_.render(treeview, "L", currentnode);
 
         }
 
-        public long weight=0;
+        public double weight=0.0;
         public Node parent_ = null;
         public Node left_ = null;
         public Node right_ = null;
@@ -148,13 +176,15 @@ namespace Neuron
 
     class NeuronClass
     {
-        int learn_dept;
+        int learn_dept=3;
+        double forget_dept=0;
         private Node root=null;
         int price = 0;
 
-        public NeuronClass(int learndept=3)
+        public NeuronClass(int learndept=3, double forgetdept= 0.0)
         {
             learn_dept = learndept;
+            forget_dept = forgetdept;
             root = new Node(null, learn_dept);
         }
 
@@ -172,6 +202,7 @@ namespace Neuron
             if(samples.Count() > learn_dept)
                 samples.RemoveRange(0, samples.Count() - learn_dept);
             root.train(samples);
+            root.forget(forget_dept);
         }
 
         public bool Predict()
@@ -182,7 +213,6 @@ namespace Neuron
 
         public void render(System.Windows.Forms.TreeView treeview)
         {
-
             root.render(treeview,"Root");
         }
     }

@@ -17,7 +17,7 @@ namespace Neuron
     public partial class MainForm : Form
     {
         
-        NeuronClass neuronClass = new NeuronClass(3);
+        NeuronClass neuronClass = new NeuronClass(3,0.0);
         int LCount=0, RCount = 0;
         int Pass=0, Fail=0;
 
